@@ -1,16 +1,19 @@
+import { Botones } from "./components/botones";
 
+import { Buscador } from "./components/buscador";
 
 
 
 export default function Home() {
   return (
     <div>
-  
+
       <h1>
-      home
+        home
 
       </h1>
-      
-      </div>
+      <Buscador></Buscador>
+      <Botones></Botones>
+    </div>
   );
 }
