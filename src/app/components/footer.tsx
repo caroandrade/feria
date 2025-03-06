@@ -8,6 +8,8 @@ export function Footer() {
       <Link href={'https://www.mendoza.edu.ar/'}>&copy; 2025 Equipo del Portal Educativo &middot; Desarrollado con Next V15 y WordPress</Link>
       <br />
 
+
+      {/* iconos de redes sociales  */}
       {/* <!-- Facebook --> */}
 
       <Link href={'https://www.facebook.com/MendozaDGE/'}>
