@@ -4,10 +4,11 @@ import Link from 'next/link';
 import { Post, ListadoProps } from '@/lib/types';
 
 
+import { SearchBar } from '@/app/components/Search-bar';
 
 
 export async function Listado({
-    title, posts, currentePage = 1, totalPages = 1, searchTerm, categorias
+    title, posts, currentPage = 1, totalPages = 1, searchTerm, categorias
 }: ListadoProps) {
 
     if (posts?.length === 0) {
@@ -30,7 +31,8 @@ export async function Listado({
                     <h2 className='text-xl mb-4'> listado</h2>
                 )
                 }
-                <div >buscar </div>
+
+                <SearchBar></SearchBar>
 
             </div>
             <div className='flex flex-col mb-4'>
@@ -53,38 +55,29 @@ export async function Listado({
             {/* paginacion  */}
 
             {totalPages > 1 ? (
-                // El operador ternario es un operador condicional que evalúa una expresión en función de una condición. 
-                <div>
-                    <div className='flex justify-between'>
-                        {currentePage > 1 && (
-                            <Link href={`/instituciones?page=${currentePage - 1}${searchTerm ? `&search=${searchTerm}` : ''}${categorias ? `&categorias=${categorias}` : ''}`}
-                                className='underline'>
-                                Anterior
-                            </Link>
+                <div className="flex justify-between">
+                    <div>
+                        {currentPage > 1 && (
+                            <Link href={`/instituciones?page=${currentPage - 1}${searchTerm ? `&search=${searchTerm}` : ''}${categorias ? `&categories=${categorias}` : ''}`} className="underline">Anterior</Link>
                         )}
                     </div>
-                    <div className='text-left'>
 
-                        Página {currentePage} of {totalPages}
+                    <div className="text-left">
+                        Página -  {currentPage} de {totalPages}
                     </div>
 
-
                     <div>
-                        <Link href={`/instituciones?page=${currentePage + 1}${searchTerm ? `&search=${searchTerm}` : ''}${categorias ? `&categorias=${categorias}` : ''}`}
-                            className='underline'>
-                            Siguiente</Link>
-
+                        {currentPage < totalPages && (
+                            <Link href={`/instituciones?page=${currentPage + 1}${searchTerm ? `&search=${searchTerm}` : ''}${categorias ? `&categories=${categorias}` : ''}`} className="underline">Siguiente</Link>
+                        )}
                     </div>
                 </div>
             ) : (
-                <div className='text-center'>
-                    <Link href={`/instituciones`} className='hover:underline text-gray-900 py-5 block rounded-md'>
-
-                        más información
-                    </Link>
-
+                <div className="text-center">
+                    <Link href={`/posts`} className="hover:underline text-gray-900 py-5 block rounded-md">View More Posts</Link>
                 </div>
             )}
+
 
         </div>
     )

@@ -1,8 +1,8 @@
-const baseUrl= "https://www.mendoza.edu.ar"; 
-//  crear una variable y asignarle el valor de la variable de entorno osea la dirección del sitio wordpress
+const baseUrl= "https://des.mendoza.edu.ar"; 
+//  crear una variable y asignarle el valor de la variable de entorno osea la dirección del sitio wordpress, ahora esta direccionado a desarrollo, 
 
 
-import { Post, Category } from '@/lib/types';
+import { Post, Category, Author } from '@/lib/types';
 
 const revalidateTime: number = 86400 // un dia en segundo
 
@@ -45,3 +45,26 @@ export async function getAllPost(
     // console.log(response.headers);
     return {posts, totalPages}; 
 }
+
+export async function getPostBySlug(slug: string ): Promise<Post | null> {
+    const response =  await fetch(`${baseUrl}/wp-json/wp/v2/posts?slug=${slug}`,{
+
+    next:{
+        revalidate:revalidateTime
+        }
+});
+    const post =  await response.json();
+    return post[0]; 
+}
+
+export async function getAuthorById(id: number ): Promise<Author | null> {
+    const response =  await fetch(`${baseUrl}/wp-json/wp/v2/user/${id}`);
+        const author: Author =  await response.json();
+        return author; 
+    }
+
+    export async function getCategoriasById(id: number[] ): Promise<Category[] > {
+        const response =  await fetch(`${baseUrl}/wp-json/wp/v2/categories?include=${id.join(',')}`);
+            const categorias: Category[] =  await response.json();
+            return categorias; 
+        }

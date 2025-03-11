@@ -38,7 +38,15 @@ export interface Post {
         posts: Post[],
         currentePage?: number,
          totalPages?: number,
+         title?: string,
         searchTerm?: string,
         categorias?: number
-        title?: string,
+    }
+
+    export type Author = {
+        id: number;
+        name: string;
+        slug: string;
+        link: string;
+    
     }
